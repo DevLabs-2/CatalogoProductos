@@ -163,3 +163,12 @@ a.secondary {
     filter: invert();
   }
 }
+
+.slick-slider {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+}
