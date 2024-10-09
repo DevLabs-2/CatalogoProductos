@@ -5,7 +5,9 @@ import products from '../products';
 import '../styles/Home.module.css'
 import Sliders from '@/components/Slider';
 import Carousel from '@/components/Carousel';
-
+import Link from 'next/link';
+import Productos from './Productos/page';
+import Navbar from '@/components/NavBar/Navbar';
 const Home = () => {
     const [productsRandom, setproductsRandom] = useState([]);
 
@@ -24,6 +26,7 @@ const Home = () => {
 
     return (
         <div style={{ padding: '20px' }}>
+            <Link href={'/Productos'}>Productos</Link>
             <h1>Productos Aleatorios</h1>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
                 {productsRandom.map((producto, index) => (
@@ -37,7 +40,6 @@ const Home = () => {
 
             <h2>Carrusel de Imágenes</h2>
             <Carousel data={products}/>
-            
         </div>
     );
 };
