@@ -1,15 +1,14 @@
 'use client'
 
-import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import styles from '../NavBar/Navbar.module.css'
+import { useRouter } from 'next/navigation'
 
 export default function Navbar() {
-  
+    const router = useRouter()
     return (
         <div className={styles.navbar}>
-            <Link href={'../../pages/Productos'}>Productos</Link>
-
+            <button type="button" onClick={() => router.push('/')}> Home </button>
+            <button type="button" onClick={() => router.push('/Productos')}> Productos </button>
         </div>
     );
   }  

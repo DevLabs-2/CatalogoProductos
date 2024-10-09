@@ -1,12 +1,9 @@
-// pages/index.js
+'use client'
 
 import { useEffect, useState } from 'react';
-import products from '../products';
-import '../styles/Home.module.css'
-import Sliders from '@/components/Slider';
+import products from '../src/products';
+import styles from '../src/styles/Home.module.css'
 import Carousel from '@/components/Carousel';
-import Link from 'next/link';
-import Productos from './Productos/page';
 import Navbar from '@/components/NavBar/Navbar';
 const Home = () => {
     const [productsRandom, setproductsRandom] = useState([]);
@@ -26,9 +23,13 @@ const Home = () => {
 
     return (
         <div style={{ padding: '20px' }}>
-            <Link href={'/Productos'}>Productos</Link>
-            <h1>Productos Aleatorios</h1>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+            <Navbar></Navbar>
+            
+            <div style={{marginTop: '5rem', marginBottom: '5rem'}}>
+                <Carousel data={products}/>
+            </div>
+            
+            <div className={[styles.inlineCentered]}>
                 {productsRandom.map((producto, index) => (
                     <div key={index} style={{ border: '1px solid #ccc', padding: '10px', width: '200px' }}>
                         <img src={producto.image} alt={producto.name} style={{ width: '100%' }} />
@@ -36,10 +37,7 @@ const Home = () => {
                         <p>{producto.desc}</p>
                     </div>
                 ))}
-            </div>
-
-            <h2>Carrusel de Imágenes</h2>
-            <Carousel data={products}/>
+            </div>  
         </div>
     );
 };

@@ -1,41 +1,55 @@
-'use client'
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './Carousel.module.css';
+import Productos from '../../products.js';
 
-import { useState, useEffect } from 'react';
-import './Carousel.module.css'
-import img1 from '../../Imagenes/Imagen1.jpg';
-import img2 from '../../Imagenes/Imagen2.jpg';
-import img3 from '../../Imagenes/Imagen3.jpg';
-import Image from 'next/image';
+const Carrousel = () => {
+  const [slideIndex, setSlideIndex] = useState(1);
+  const slidesRef = useRef([]);
+  const dotsRef = useRef([]);
 
-import Carousel from 'react-bootstrap/Carousel';
+  const showSlides = (n) => {
+    if (n > slidesRef.current.length) { setSlideIndex(1); }
+    if (n < 1) { setSlideIndex(slidesRef.current.length); }
 
-export default function CarouselSlider() {
+    slidesRef.current.forEach((slide, i) => {
+      slide.style.display = (i === slideIndex - 1) ? "block" : "none";
+    });
+
+    dotsRef.current.forEach((dot, i) => {
+      dot.className = dot.className.replace(" active", "");
+      if (i === slideIndex - 1) {
+        dot.className += " active";
+      }
+    });
+  };
+
+  useEffect(() => {
+      showSlides(slideIndex);
+  }, [slideIndex]);
+
+  const plusSlides = (n) => {
+      setSlideIndex((prevIndex) => prevIndex + n);
+  };
 
   return (
-    <Carousel>
-      <Carousel.Item>
-        <Image src={img1} alt='img1'/>
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <Image src={img2} alt='img2'/>
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <Image src={img3} alt='img3'/>
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+    <div className={styles.slideshowContainer}>
+            <a className={styles.prev} onClick={() => plusSlides(-1)}>&#10094;</a>
+      <div ref={el => slidesRef.current[0] = el} className={[styles.mySlides, styles.fade]}>
+        <img  src={Productos[0].image} alt={Productos[0].name}/>
+      </div>
+
+      <div ref={el => slidesRef.current[1] = el} className={[styles.mySlides, styles.fade]}>
+        <img src={Productos[1].image} alt={Productos[1].name}/>
+      </div>
+
+      <div ref={el => slidesRef.current[2] = el} className={[styles.mySlides, styles.fade]}>
+        <img src={Productos[2].image} alt={Productos[2].name}/>
+      </div>
+
+
+      <a className={styles.next} onClick={() => plusSlides(1)}>&#10095;</a>
+    </div>
   );
-}
+};
+
+export default Carrousel;

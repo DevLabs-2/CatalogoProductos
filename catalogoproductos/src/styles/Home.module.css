@@ -172,3 +172,9 @@ a.secondary {
   align-items: center;
   padding: 0 20px;
 }
+
+.inlineCentered {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
