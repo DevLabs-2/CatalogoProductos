@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Carousel.module.css';
 import Productos from '../../products.js';
-
+import Image from 'next/image';
 const Carrousel = () => {
   const [slideIndex, setSlideIndex] = useState(1);
   const slidesRef = useRef([]);
@@ -34,16 +34,16 @@ const Carrousel = () => {
   return (
     <div className={styles.slideshowContainer}>
             <a className={styles.prev} onClick={() => plusSlides(-1)}>&#10094;</a>
-      <div ref={el => slidesRef.current[0] = el} className={[styles.mySlides, styles.fade]}>
-        <img  src={Productos[0].image} alt={Productos[0].name}/>
+      <div ref={el => slidesRef.current[0] = el} className={styles.carouselImage}>
+        <img src={`/Imagenes/car1.jpg`} alt={"carousel 1"} style={{width: '100%', height: '20rem', objectFit: 'cover'}} />
       </div>
 
-      <div ref={el => slidesRef.current[1] = el} className={[styles.mySlides, styles.fade]}>
-        <img src={Productos[1].image} alt={Productos[1].name}/>
+      <div ref={el => slidesRef.current[1] = el} className={styles.carouselImage}>
+        <img src={`/Imagenes/car2.jpg`} alt={"carousel 2"} style={{width: '100%', height: '20rem', objectFit: 'cover'}} />
       </div>
 
-      <div ref={el => slidesRef.current[2] = el} className={[styles.mySlides, styles.fade]}>
-        <img src={Productos[2].image} alt={Productos[2].name}/>
+      <div ref={el => slidesRef.current[2] = el} className={styles.carouselImage}>
+        <img src={`/Imagenes/car3.jpg`} alt={"carousel 3"} style={{width: '100%', height: '20rem', objectFit: 'cover'}} />
       </div>
 
 

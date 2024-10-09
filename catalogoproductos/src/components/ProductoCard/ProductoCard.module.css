@@ -3,9 +3,17 @@
     border-radius: 4px;
     padding: 10px;
     text-align: center;
-    background: #fff;
+    background: #a0c4ff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    transition: background-color 0.3s ease;
+    border: 2px solid rgba(0, 0, 0, 0.137);
+    border-radius: 2%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.product:hover {
+    background: #9bf6ff;
+
 }
 
 .Image {

@@ -7,13 +7,13 @@
     width: 90%;
     margin: 20px auto;
     border-radius: 8px;
-    background-color: #85858569;
+    background-color: #a0c4ff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
-  .navbar button {
-    color: black;
+  .button {
+    color: #000;
     text-align: center;
     padding: 14px 20px;
     text-decoration: none;
@@ -23,9 +23,9 @@
     margin-right: 20px;
   }
   
-  .navbar a:hover {
-    background-color: #5757578a;
-    color: #fff;
+  .button:hover {
+    background-color: #9bf6ff;
+    color: #000;
     transition: 0.3s;
   }
   

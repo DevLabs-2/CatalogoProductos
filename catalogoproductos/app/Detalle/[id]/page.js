@@ -20,12 +20,12 @@ const ProductPage = () => {
 
     return (
     <>
-        <div style={{ padding: '20px' }}>
+        <div className={styles.page}>
             <Navbar/>
             <div className={styles.product}>
             <h1>{product.name}</h1>
             <Image
-                src={product.image}
+                src={`/Imagenes/${product.image}`}
                 alt={product.name}
                 width={300}
                 height={300}

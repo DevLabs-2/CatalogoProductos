@@ -1,3 +1,8 @@
+.page {
+  margin: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .product {
     border: 1px solid #ccc;
     border-radius: 4px;

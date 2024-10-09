@@ -9,14 +9,12 @@ const ProductoCard = ({producto, index}) => {
                 <h3>{producto.name}</h3>
                 
                 <Image
-                src={producto.image}
+                src={`/Imagenes/${producto.image}`}
                 alt={producto.name}
                 className={styles.Image}
                 width={100}
                 height={100}
                 />
-
-                <p>{producto.desc}</p>
             </div>
             
         </>
