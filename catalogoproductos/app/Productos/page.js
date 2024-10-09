@@ -26,10 +26,8 @@ const Productos = () => {
     }
 
     return productosFiltrados.map((producto) => (
-      <div key={producto.name} style={styles.product}>
-        
+      <div key={producto.name} >
         <ProductoCard producto={producto} index={productosFiltrados.findIndex(prod => prod.name === producto.name)}/>
-
       </div>
     ));
   }
