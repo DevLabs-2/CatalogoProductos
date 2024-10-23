@@ -10,33 +10,83 @@ const FILTRO = ['name', 'precio', 'descripcion'];
 
 const Productos = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchChanged, setSearchChanged] = useState(false);
   const [pickerChanged, setPickerChanged] = useState(false);
-  const [selectedValue, setSelectedValue] = useState('');
+  const [selectedTag, setselectedTag] = useState('all');
   const [products, setProducts] = useState([]);
   const [tags, setTags] = useState([])
+  const [taggedResults, setTaggedResults] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
+  const [finalResults, setFinalResults] = useState([]);
+
   useEffect(() => {
       const get = async () => {
           let data = await apiService.getProducts();
           setProducts(data);
+          setFinalResults(data);
           data = await apiService.getCategories();
-          console.log(data)
           setTags(data)
       }
       get();
   }, []);
   
   useEffect(() => {
-    //fetch de la busqueda filtrada por nombre
-    if(pickerChanged){
-      //fetch de la busqueda con los filtros por tag
-      setPickerChanged(false)
-    }
-  },[searchTerm, pickerChanged])
+    console.log(products)
+  },[products])
+
+  useEffect(() => {
+      if(selectedTag === "all"){
+        const get = async () => {
+          setTaggedResults(await apiService.getProducts())
+        }
+        get();
+      }
+      else {
+        const getTagged = async () => {
+          console.log("cambiaron los tagged")
+          setTaggedResults(await apiService.getProductsByCategory(selectedTag))
+        }
+        getTagged()
+      }
+  },[selectedTag])
+
+
+  useEffect(() => {
+      const get = async () => {
+        console.log("cambiaron los search")
+
+        setSearchResults(await apiService.searchProducts(searchTerm)); 
+      }
+      get();
+  },[searchTerm])
+
+  useEffect(() => {
+    const intersection = taggedResults.filter(taggedProduct =>
+      searchResults.some(searchProduct => searchProduct.id === taggedProduct.id)
+    );
+    setFinalResults(intersection)
+  },[taggedResults, searchResults])
 
   const handlePickerChange = (event) => {
-    setSelectedValue(event.target.value)
-    setPickerChanged(true)
+    setselectedTag(event.target.value)
   }
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event)
+  }
+
+  const renderProducts = () => {
+    if (finalResults.length > 0) {
+      return finalResults.map((producto) => (
+        <div key={producto.id} className={styles.product}>
+          <ProductoCard name={producto.title} image={producto.thumbnail } id={producto.id} />
+        </div>
+      ));
+    } else {
+      return <div>No se encontró nada</div>;
+    }
+  }
+  
 
   return (
     <div className={styles.container}>
@@ -45,12 +95,12 @@ const Productos = () => {
         <SearchInput
           className={styles.inputContainer}
           inputClassName={styles.searchInput} 
-          onChange={(term) => setSearchTerm(term)} 
+          onChange={handleSearchChange} 
           placeholder="Buscar productos..." 
         />
         <div className={styles.filtroContainer}>
           <label>Filtro:</label>
-          <select onChange={handlePickerChange} value={selectedValue}>
+          <select onChange={handlePickerChange} value={selectedTag}>
             <option key={'all'} value={'all'}>All</option>
             {tags.map((tag) => (
               <option key={tag.slug} value={tag.slug}>{tag.name}</option>
@@ -59,9 +109,9 @@ const Productos = () => {
         </div>
       </div>
       
-      {/* <div className={styles.productsContainer}>
+      <div className={styles.productsContainer}>
         {renderProducts()}
-      </div> */}
+      </div>
     </div>
   );
 }

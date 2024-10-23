@@ -43,7 +43,7 @@ const Home = () => {
             <div className={[styles.inlineCentered]}>
                 {productsRandom.map((producto, index) => (
                     <div key={index} style={{width:'15%', flexWrap: 'wrap'}}>
-                        <ProductoCard name={producto.title} image={producto.images[0]} id={producto.id} />
+                        <ProductoCard name={producto.title} image={producto.thumbnail} id={producto.id} />
                     </div>
                 ))}
             </div>  

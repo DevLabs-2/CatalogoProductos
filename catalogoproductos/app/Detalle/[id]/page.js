@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image';
 import styles from './Detalle.module.css';
 import Navbar from '@/components/NavBar/Navbar';
 import { useState, useEffect } from 'react';
@@ -43,16 +42,16 @@ const ProductPage = () => {
             <Navbar/>
             <div className={styles.product}>
                 <h1>{product.title}</h1>
-                <Image
-                    src={product.image}
+                <img
+                    src={product.thumbnail}
                     alt={product.title}
                     width={300}
                     height={300}
                     className={styles.image}
                 />
-                <p>{product.desc}</p>
+                <p>{product.description}</p>
                 <span className={styles.category}> 
-                Categoría: {product.tags.map((tag, index) => (
+                Categorías: {product.tags.map((tag, index) => (
                     <span key={index}>
                         {tag}{index < product.tags.length - 1 && ', '}
                     </span>

@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Carousel.module.css';
 import Productos from '../../products.js';
-import Image from 'next/image';
 const Carrousel = () => {
   const [slideIndex, setSlideIndex] = useState(1);
   const slidesRef = useRef([]);

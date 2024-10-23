@@ -1,6 +1,5 @@
 import styles from './ProductoCard.module.css'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
 const ProductoCard = ({name, image, id}) => {
     const router = useRouter()
     return(
@@ -8,7 +7,7 @@ const ProductoCard = ({name, image, id}) => {
             <div onClick={() => router.push(`/Detalle/${id}`)} className={styles.product}>
                 <h3>{name}</h3>
                 
-                <Image
+                <img
                 src={image}
                 alt={name}
                 className={styles.Image}
