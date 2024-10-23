@@ -1,19 +1,29 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import products from '../src/products';
 import styles from '../src/styles/Home.module.css'
 import Carousel from '@/components/Carousel';
 import Navbar from '@/components/NavBar/Navbar';
 import ProductoCard from '@/components/ProductoCard';
+import apiService from '@/apiCalls/apicalls';
+
 const Home = () => {
     const [productsRandom, setproductsRandom] = useState([]);
-
+    const [products, setProducts] = useState([]);
     useEffect(() => {
-        const shuffled = products.sort(() => 0.5 - Math.random());
-        setproductsRandom(shuffled.slice(0, 6));
+        const get = async () => {
+            let data = await apiService.getProducts();
+            setProducts(data);
+        }
+        get();
     }, []);
 
+    useEffect(() => {
+        if (products.length > 0) {
+            const shuffled = products.sort(() => 0.5 - Math.random());
+            setproductsRandom(shuffled.slice(0, 6));
+        }
+    }, [products])
     const settings = {
         dots: true,
         infinite: true,
@@ -33,7 +43,7 @@ const Home = () => {
             <div className={[styles.inlineCentered]}>
                 {productsRandom.map((producto, index) => (
                     <div key={index} style={{width:'15%', flexWrap: 'wrap'}}>
-                        <ProductoCard producto={producto} index={products.findIndex(prod => prod.name === producto.name)} />
+                        <ProductoCard name={producto.title} image={producto.images[0]} id={producto.id} />
                     </div>
                 ))}
             </div>  
