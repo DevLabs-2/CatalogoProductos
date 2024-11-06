@@ -36,6 +36,7 @@ const ProductPage = () => {
 
     const handleAgregarCarrito = () => {
         agregarItem(product.id)
+        console.log(product)
     };
     
     if (!product) {
@@ -55,6 +56,7 @@ const ProductPage = () => {
                     className={styles.image}
                 />
                 <p>{product.description}</p>
+                <p>{product.price} $</p>
                 <span className={styles.category}>
                     Categorías: {product.tags.map((tag, index) => (
                         <span key={index}>
