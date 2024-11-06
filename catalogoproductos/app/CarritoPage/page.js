@@ -50,10 +50,12 @@ function CarritoPage(){
 
     return (
         <>
-            <div className={styles.page}>
+           <div className={styles.page}>
                 <NavBar></NavBar>
-                {renderProducts()}
-                <button onClick={() => handleAgregar('nuevo_id')}>Agregar nuevo producto</button>
+                <p>{total} $</p>
+                <div className={styles.productsContainer}>
+                    {renderProducts()}
+                </div>
             </div>
         </>
     )
