@@ -10,4 +10,11 @@
     transition: transform 0.2s;
     max-width: 200px;
     margin: 20px auto;
-  } 
+  }
+.productsContainer {
+    margin-top: 3%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
