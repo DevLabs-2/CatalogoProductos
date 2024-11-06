@@ -2,3 +2,12 @@
     padding: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.product {
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+    background: #fff;
+    transition: transform 0.2s;
+    max-width: 200px;
+    margin: 20px auto;
+  } 

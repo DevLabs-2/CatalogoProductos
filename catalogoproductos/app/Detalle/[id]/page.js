@@ -5,11 +5,12 @@ import Navbar from '@/components/NavBar/Navbar';
 import { useState, useEffect } from 'react';
 import { useRouter, usePathname  } from 'next/navigation';
 import apiService  from '@/apiCalls/apicalls';
+import {useCarrito} from '@/carrito'
 
 const ProductPage = () => {
-    
-    const pathName = usePathname()
 
+    const pathName = usePathname()
+    const { agregarItem } = useCarrito();
     const SplitPath = (path) => {
         const parts = path.split('/');
         return parts[parts.length - 1];
@@ -33,13 +34,17 @@ const ProductPage = () => {
         }
     },[products])
 
+    const handleAgregarCarrito = () => {
+        agregarItem(product.id)
+    };
+    
     if (!product) {
         return <div>Cargando...</div>;
     }
     return (
     <>
         <div className={styles.page}>
-            <Navbar/>
+            <Navbar />
             <div className={styles.product}>
                 <h1>{product.title}</h1>
                 <img
@@ -50,13 +55,20 @@ const ProductPage = () => {
                     className={styles.image}
                 />
                 <p>{product.description}</p>
-                <span className={styles.category}> 
-                Categorías: {product.tags.map((tag, index) => (
-                    <span key={index}>
-                        {tag}{index < product.tags.length - 1 && ', '}
-                    </span>
+                <span className={styles.category}>
+                    Categorías: {product.tags.map((tag, index) => (
+                        <span key={index}>
+                            {tag}{index < product.tags.length - 1 && ', '}
+                        </span>
                     ))}
-                </span>  
+                </span>
+
+                <div className={styles.container}>
+                    <button onClick={handleAgregarCarrito} className={styles.CarritoButton}>
+                    Agregar al carrito
+                    </button>
+                </div>
+                
             </div>
         </div>
     </>

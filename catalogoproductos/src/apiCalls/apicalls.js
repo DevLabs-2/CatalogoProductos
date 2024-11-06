@@ -11,6 +11,16 @@ class ApiService {
         }
     }
 
+    async getProductById(id) {
+        try {
+            const response = await axios.get(`https://dummyjson.com/products/${id}`);
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            return [];
+        }
+    }
+
     async getCategories() {
         try {
             const response = await axios.get('https://dummyjson.com/products/categories');
