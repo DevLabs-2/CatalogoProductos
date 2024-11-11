@@ -29,14 +29,12 @@ const ProductPage = () => {
         const id = SplitPath(pathName);
         if (products.length > 0) {
             const foundProduct = products.find((prod) => prod.id.toString() === id);
-            console.log(foundProduct.id + " " + id)
             setProduct(foundProduct);
         }
     },[products])
 
     const handleAgregarCarrito = () => {
         agregarItem(product.id)
-        console.log(product)
     };
     
     if (!product) {

@@ -29,10 +29,6 @@ const Productos = () => {
       }
       get();
   }, []);
-  
-  useEffect(() => {
-    console.log(products)
-  },[products])
 
   useEffect(() => {
       if(selectedTag === "all"){
@@ -43,7 +39,6 @@ const Productos = () => {
       }
       else {
         const getTagged = async () => {
-          console.log("cambiaron los tagged")
           setTaggedResults(await apiService.getProductsByCategory(selectedTag))
         }
         getTagged()
@@ -53,8 +48,6 @@ const Productos = () => {
 
   useEffect(() => {
       const get = async () => {
-        console.log("cambiaron los search")
-
         setSearchResults(await apiService.searchProducts(searchTerm)); 
       }
       get();

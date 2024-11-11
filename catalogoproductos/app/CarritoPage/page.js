@@ -11,6 +11,7 @@ function CarritoPage(){
 
     const { carrito, agregarItem, eliminarItem } = useCarrito();
     const [finalResults, setFinalResults] = useState([]);
+    const [total, setTotal] = useState(0);
     const handleAgregar = (id) => {
         agregarItem(id);
     };
@@ -29,9 +30,23 @@ function CarritoPage(){
     };
 
     useEffect(() => {
-        if (carrito.length > 0) {
-            obtainProducts();
+        let precio = 0;
+        finalResults.forEach((result) => {
+            precio += result.price
+        })  
+        setTotal(precio)
+    }, [finalResults])
+
+    useEffect(() => {
+        if(carrito) {
+            if (carrito.length > 0) {
+                obtainProducts();
+            }
+            else {
+                setFinalResults([])
+            }
         }
+        
     }, [carrito]);
     
     const renderProducts = () => {
@@ -46,13 +61,12 @@ function CarritoPage(){
           return <div>No se encontró nada</div>;
         }
       }
-      
-
+    
     return (
         <>
            <div className={styles.page}>
                 <NavBar></NavBar>
-                <p>{total} $</p>
+                <strong>Importe total del carrito: {total} $</strong>
                 <div className={styles.productsContainer}>
                     {renderProducts()}
                 </div>

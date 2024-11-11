@@ -17,7 +17,6 @@ export const CarritoProvider = ({ children }) => {
         setCarrito((prevCarrito) => {
             const nuevoCarrito = [...prevCarrito, id];
             localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
-            console.log(nuevoCarrito)
             return nuevoCarrito;
         });
     };

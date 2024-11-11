@@ -76,4 +76,18 @@
   
   .navbar .left a {
     margin-right: 20px;
-  } 
+  }
+
+  .carritoCount {
+      position: absolute;
+      top: 60px;
+      right: 140px;
+      font-size: 12px;
+      color: white; 
+      background-color: red;
+      border-radius: 50%;
+      padding: 2px 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
